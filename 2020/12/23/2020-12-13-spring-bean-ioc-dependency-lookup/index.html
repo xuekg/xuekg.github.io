@@ -16,7 +16,7 @@
 <meta property="og:description" content="Spring IOC依赖查找">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-23T10:26:07.789Z">
-<meta property="article:modified_time" content="2020-12-23T13:16:12.979Z">
+<meta property="article:modified_time" content="2020-12-23T13:21:52.323Z">
 <meta property="article:author" content="xuekg">
 <meta property="article:tag" content="Spring Bean">
 <meta name="twitter:card" content="summary">
@@ -184,11 +184,11 @@
 </ul>
 </li>
 <li>根据名称+类型查找<ul>
-<li>getBean(String,Class)<h2 id="02-集合类型依赖查找"><a href="#02-集合类型依赖查找" class="headerlink" title="02    集合类型依赖查找"></a>02    集合类型依赖查找</h2></li>
+<li>getBean(String,Class)</li>
 </ul>
 </li>
 </ul>
-<ol>
+<h2 id="02-集合类型依赖查找"><a href="#02-集合类型依赖查找" class="headerlink" title="02    集合类型依赖查找"></a>02    集合类型依赖查找</h2><ol>
 <li>java.beans.beancontext.BeanContext</li>
 <li>ListableBeanFactory接口</li>
 </ol>
@@ -216,13 +216,13 @@
 </ul>
 </li>
 <li>spring 3.0获取指定名称+标注类型bean实例<ul>
-<li>findAnnotationOnBean(String,Class&lt;? extend Annotation&gt;)<h2 id="03-层次性依赖查找"><a href="#03-层次性依赖查找" class="headerlink" title="03    层次性依赖查找"></a>03    层次性依赖查找</h2></li>
+<li>findAnnotationOnBean(String,Class&lt;? extend Annotation&gt;)</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<ol>
+<h2 id="03-层次性依赖查找"><a href="#03-层次性依赖查找" class="headerlink" title="03    层次性依赖查找"></a>03    层次性依赖查找</h2><ol>
 <li>java.beans.beancontext.BeanContext</li>
 <li>HierarchicalBeanFactory<ul>
 <li>双亲 BeanFactory:getParentBeanFactory()</li>
@@ -279,9 +279,11 @@
 <li>CommonAnnotationBeanPostProcessor 条件激活 postContruct</li>
 <li>EventListenterMethodProcessor 处理eventListener注解标注的事件广播</li>
 <li>DefaultEventListenerFactory</li>
-<li>PersistenceAnnotationBeanPostProcessor  条件激活 处理jpa<h2 id="07-依赖查找中的经典异常"><a href="#07-依赖查找中的经典异常" class="headerlink" title="07    依赖查找中的经典异常"></a>07    依赖查找中的经典异常</h2></li>
+<li>PersistenceAnnotationBeanPostProcessor  条件激活 处理jpa</li>
 </ul>
 </li>
+</ol>
+<h2 id="07-依赖查找中的经典异常"><a href="#07-依赖查找中的经典异常" class="headerlink" title="07    依赖查找中的经典异常"></a>07    依赖查找中的经典异常</h2><ol>
 <li>BeansException的子类<ul>
 <li>NoSuchBeanDefinitionException</li>
 <li>NoUniqueBeanDefinitionException</li>
