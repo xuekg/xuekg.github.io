@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020/12 | Valar Morghulis</title>
+  <title>Spring IOC依赖查找 | Valar Morghulis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Valar Morghulis">
-<meta property="og:url" content="http://example.com/archives/2020/12/index.html">
+  <meta name="description" content="Spring IOC依赖查找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IOC依赖查找">
+<meta property="og:url" content="http://example.com/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/index.html">
 <meta property="og:site_name" content="Valar Morghulis">
+<meta property="og:description" content="Spring IOC依赖查找">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-23T10:26:07.789Z">
+<meta property="article:modified_time" content="2020-12-17T09:24:17.334Z">
 <meta property="article:author" content="xuekg">
 <meta name="twitter:card" content="summary">
   
@@ -134,75 +138,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2020-12-13-spring-bean-ioc-dependency-lookup" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-20-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.790Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-20-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%9F%A5%E8%AF%A2/">Spring IOC依赖注入</a>
+    <h1 class="article-title" itemprop="name">
+      Spring IOC依赖查找
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/" class="archive-article-date">
+        
+        <a href="/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/" class="archive-article-date">
   	<time datetime="2020-12-23T10:26:07.789Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/">Spring IOC依赖查找</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="01-单一类型依赖查找"><a href="#01-单一类型依赖查找" class="headerlink" title="01 单一类型依赖查找"></a>01 单一类型依赖查找</h2><ol>
+<li>JNDI:javax.naming.Context#lookup()</li>
+<li>JavaBeans:java.beans.beancontext.BeanContext</li>
+<li>BeanFactory接口：</li>
+</ol>
+<ul>
+<li>根据名称查询<ul>
+<li>getBean(String)</li>
+<li>spring 2.5覆盖默认参数 getBean(string,object…)</li>
+</ul>
+</li>
+<li>根据类型查询<ul>
+<li>Bean实时查找<ul>
+<li>spring 3.0 getBean(class)</li>
+<li>spring 4.1覆盖默认参数getBean(Class,Object…)</li>
+</ul>
+</li>
+<li>spring 5.1 bean延迟查找<ul>
+<li>getBeanProvider(Class)</li>
+<li>getBeanProvider(ResolvableType)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>根据名称+类型查找<ul>
+<li>getBean(String,Class)<h2 id="02-集合类型依赖查找"><a href="#02-集合类型依赖查找" class="headerlink" title="02    集合类型依赖查找"></a>02    集合类型依赖查找</h2></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>java.beans.beancontext.BeanContext</li>
+<li>ListableBeanFactory接口</li>
+</ol>
+<ul>
+<li>根据bean类型查找<ul>
+<li>获取同类型bean名称列表<ul>
+<li>getBeanNamesForType(Class)</li>
+<li>spring 4.2 getBeanNamesForType(ResolvableType)</li>
+</ul>
+</li>
+<li>获取同类型bean实例列表<ul>
+<li>getBeansOfType(Class)以及重载方法 </li>
+<li>会导致bean被提前初始化，bean的不完全，可能会有错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过注解类型查找<ul>
+<li>spring 3.0获取标注类型bean名称列表<ul>
+<li>getBeanNamesForAnnotation(Class&lt;? extend Annotation&gt;)</li>
+</ul>
+</li>
+<li>spring 3.0获取标注类型bean实例列表<ul>
+<li>getBeanNamesWithAnnotation(Class&lt;? extend Annotation&gt;)</li>
+</ul>
+</li>
+<li>spring 3.0获取指定名称+标注类型bean实例<ul>
+<li>findAnnotationOnBean(String,Class&lt;? extend Annotation&gt;)<h2 id="03-层次性依赖查找"><a href="#03-层次性依赖查找" class="headerlink" title="03    层次性依赖查找"></a>03    层次性依赖查找</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>java.beans.beancontext.BeanContext</li>
+<li>HierarchicalBeanFactory<ul>
+<li>双亲 BeanFactory:getParentBeanFactory()</li>
+<li>层次性查找</li>
+<li>根据bean名称查<ul>
+<li>基于containsLocalBean方法实现</li>
+</ul>
+</li>
+<li>根据bean类型查找实例列表<ul>
+<li>单一类型 BeanFactoryUtils#beansOfType</li>
+<li>集合类型 BeanFactoryUtils#beansOfTypeIncludingAncestors</li>
+</ul>
+</li>
+<li>根据Java注解查找名称列表<ul>
+<li>BeanFactoryUtils#beanNamesForTypeIncludingAncestors<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HierarchicalDependencyLookupDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">      <span class="comment">// 将当前类 ObjectProviderDemo 作为配置类（Configuration Class）</span></span><br><span class="line">      applicationContext.register(ObjectProviderDemo.class);</span><br><span class="line">      <span class="comment">// 1. 获取 HierarchicalBeanFactory &lt;- ConfigurableBeanFactory &lt;- ConfigurableListableBeanFactory</span></span><br><span class="line">      ConfigurableListableBeanFactory beanFactory = applicationContext.getBeanFactory();</span><br><span class="line">      System.out.println(<span class="string">&quot;当前 BeanFactory 的 Parent BeanFactory ： &quot;</span> + beanFactory.getParentBeanFactory());</span><br><span class="line">      <span class="comment">// 2. 设置 Parent BeanFactory</span></span><br><span class="line">      HierarchicalBeanFactory parentBeanFactory = createParentBeanFactory();</span><br><span class="line">      beanFactory.setParentBeanFactory(parentBeanFactory);</span><br><span class="line">      System.out.println(<span class="string">&quot;当前 BeanFactory 的 Parent BeanFactory ： &quot;</span> + beanFactory.getParentBeanFactory());</span><br><span class="line"></span><br><span class="line">      displayContainsLocalBean(beanFactory, <span class="string">&quot;user&quot;</span>);</span><br><span class="line">      displayContainsLocalBean(parentBeanFactory, <span class="string">&quot;user&quot;</span>);</span><br><span class="line"></span><br><span class="line">      displayContainsBean(beanFactory, <span class="string">&quot;user&quot;</span>);</span><br><span class="line">      displayContainsBean(parentBeanFactory, <span class="string">&quot;user&quot;</span>);</span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayContainsBean</span><span class="params">(HierarchicalBeanFactory beanFactory, String beanName)</span> </span>&#123;</span><br><span class="line">      System.out.printf(<span class="string">&quot;当前 BeanFactory[%s] 是否包含 Bean[name : %s] : %s\n&quot;</span>, beanFactory, beanName,</span><br><span class="line">              containsBean(beanFactory, beanName));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">containsBean</span><span class="params">(HierarchicalBeanFactory beanFactory, String beanName)</span> </span>&#123;</span><br><span class="line">      BeanFactory parentBeanFactory = beanFactory.getParentBeanFactory();</span><br><span class="line">      <span class="keyword">if</span> (parentBeanFactory <span class="keyword">instanceof</span> HierarchicalBeanFactory) &#123;</span><br><span class="line">          HierarchicalBeanFactory parentHierarchicalBeanFactory = HierarchicalBeanFactory.class.cast(parentBeanFactory);</span><br><span class="line">          <span class="keyword">if</span> (containsBean(parentHierarchicalBeanFactory, beanName)) &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> beanFactory.containsLocalBean(beanName);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayContainsLocalBean</span><span class="params">(HierarchicalBeanFactory beanFactory, String beanName)</span> </span>&#123;</span><br><span class="line">      System.out.printf(<span class="string">&quot;当前 BeanFactory[%s] 是否包含 Local Bean[name : %s] : %s\n&quot;</span>, beanFactory, beanName,</span><br><span class="line">              beanFactory.containsLocalBean(beanName));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ConfigurableListableBeanFactory <span class="title">createParentBeanFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      DefaultListableBeanFactory beanFactory = <span class="keyword">new</span> DefaultListableBeanFactory();</span><br><span class="line">      XmlBeanDefinitionReader reader = <span class="keyword">new</span> XmlBeanDefinitionReader(beanFactory);</span><br><span class="line">      <span class="comment">// XML 配置文件 ClassPath 路径</span></span><br><span class="line">      String location = <span class="string">&quot;classpath:/META-INF/dependency-lookup-context.xml&quot;</span>;</span><br><span class="line">      <span class="comment">// 加载配置</span></span><br><span class="line">      reader.loadBeanDefinitions(location);</span><br><span class="line">      <span class="keyword">return</span> beanFactory;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="04-延迟依赖查找"><a href="#04-延迟依赖查找" class="headerlink" title="04    延迟依赖查找"></a>04    延迟依赖查找</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ObjectFactory</li>
+<li>ObjectProvider<ul>
+<li>getIfAvailable(Supplier)</li>
+<li>ifAvailable(Consumer)</li>
+<li>stream扩展<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectProviderDemo</span> </span>&#123; <span class="comment">// @Configuration 是非必须注解</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">      <span class="comment">// 将当前类 ObjectProviderDemo 作为配置类（Configuration Class）</span></span><br><span class="line">      applicationContext.register(ObjectProviderDemo.class);</span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line">      <span class="comment">// 依赖查找集合对象</span></span><br><span class="line">      lookupByObjectProvider(applicationContext);</span><br><span class="line">      lookupIfAvailable(applicationContext);</span><br><span class="line">      lookupByStreamOps(applicationContext);</span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lookupByStreamOps</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      ObjectProvider&lt;String&gt; objectProvider = applicationContext.getBeanProvider(String.class);</span><br><span class="line">      objectProvider.stream().forEach(System.out::println);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lookupIfAvailable</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      ObjectProvider&lt;User&gt; userObjectProvider = applicationContext.getBeanProvider(User.class);</span><br><span class="line">      User user = userObjectProvider.getIfAvailable(User::createUser);</span><br><span class="line">      System.out.println(<span class="string">&quot;当前 User 对象：&quot;</span> + user);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="meta">@Primary</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">helloWorld</span><span class="params">()</span> </span>&#123; <span class="comment">// 方法名就是 Bean 名称 = &quot;helloWorld&quot;</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;Hello,World&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">message</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;Message&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lookupByObjectProvider</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      ObjectProvider&lt;String&gt; objectProvider = applicationContext.getBeanProvider(String.class);</span><br><span class="line">      System.out.println(objectProvider.getObject());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="05-安全依赖查找"><a href="#05-安全依赖查找" class="headerlink" title="05    安全依赖查找"></a>05    安全依赖查找</h2></li>
+</ul>
+</li>
+<li>单一类型<ul>
+<li>BeanFactory#getBean 实时 不安全</li>
+<li>ObjectFactory#getObject 延迟 不安全</li>
+<li>ObjectProvider#getIfAvailable 延迟 安全</li>
+</ul>
+</li>
+<li>集合类型<ul>
+<li>ListableBeanFactory#getBeansOfType 安全</li>
+<li>ObjectProvider#stream 安全</li>
+</ul>
+</li>
+<li>DefaultListableBeanFactory 单一 集合 层次<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeSafetyDependencyLookupDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">      <span class="comment">// 将当前类 TypeSafetyDependencyLookupDemo 作为配置类（Configuration Class）</span></span><br><span class="line">      applicationContext.register(TypeSafetyDependencyLookupDemo.class);</span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 演示 BeanFactory#getBean 方法的安全性</span></span><br><span class="line">      displayBeanFactoryGetBean(applicationContext);</span><br><span class="line">      <span class="comment">// 演示 ObjectFactory#getObject 方法的安全性</span></span><br><span class="line">      displayObjectFactoryGetObject(applicationContext);</span><br><span class="line">      <span class="comment">// 演示 ObjectProvider#getIfAvaiable 方法的安全性</span></span><br><span class="line">      displayObjectProviderIfAvailable(applicationContext);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 演示 ListableBeanFactory#getBeansOfType 方法的安全性</span></span><br><span class="line">      displayListableBeanFactoryGetBeansOfType(applicationContext);</span><br><span class="line">      <span class="comment">// 演示 ObjectProvider Stream 操作的安全性</span></span><br><span class="line">      displayObjectProviderStreamOps(applicationContext);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayObjectProviderStreamOps</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      ObjectProvider&lt;User&gt; userObjectProvider = applicationContext.getBeanProvider(User.class);</span><br><span class="line">      printBeansException(<span class="string">&quot;displayObjectProviderStreamOps&quot;</span>, () -&gt; userObjectProvider.forEach(System.out::println));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayListableBeanFactoryGetBeansOfType</span><span class="params">(ListableBeanFactory beanFactory)</span> </span>&#123;</span><br><span class="line">      printBeansException(<span class="string">&quot;displayListableBeanFactoryGetBeansOfType&quot;</span>, () -&gt; beanFactory.getBeansOfType(User.class));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayObjectProviderIfAvailable</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      ObjectProvider&lt;User&gt; userObjectProvider = applicationContext.getBeanProvider(User.class);</span><br><span class="line">      printBeansException(<span class="string">&quot;displayObjectProviderIfAvailable&quot;</span>, () -&gt; userObjectProvider.getIfAvailable());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayObjectFactoryGetObject</span><span class="params">(AnnotationConfigApplicationContext applicationContext)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ObjectProvider is ObjectFactory</span></span><br><span class="line">      ObjectFactory&lt;User&gt; userObjectFactory = applicationContext.getBeanProvider(User.class);</span><br><span class="line">      printBeansException(<span class="string">&quot;displayObjectFactoryGetObject&quot;</span>, () -&gt; userObjectFactory.getObject());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayBeanFactoryGetBean</span><span class="params">(BeanFactory beanFactory)</span> </span>&#123;</span><br><span class="line">      printBeansException(<span class="string">&quot;displayBeanFactoryGetBean&quot;</span>, () -&gt; beanFactory.getBean(User.class));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printBeansException</span><span class="params">(String source, Runnable runnable)</span> </span>&#123;</span><br><span class="line">      System.err.println(<span class="string">&quot;==========================================&quot;</span>);</span><br><span class="line">      System.err.println(<span class="string">&quot;Source from :&quot;</span> + source);</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          runnable.run();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (BeansException exception) &#123;</span><br><span class="line">          exception.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="06-内建可查找的依赖"><a href="#06-内建可查找的依赖" class="headerlink" title="06    内建可查找的依赖"></a>06    内建可查找的依赖</h2></li>
+<li>AbstractApplicationContext内建可查找的依赖<ul>
+<li>Environment       外部配置以及Profiles</li>
+<li>systemProperties  Java系统属性</li>
+<li>systemEnvironmnet 操作系统环境变量</li>
+<li>MessageSource     国际化文案</li>
+<li>LifecycleProcessor Lifecycle Bean 处理器</li>
+<li>ApplicationEventMulticaster spring事件广播器</li>
+</ul>
+</li>
+<li>注解驱动spring上下文内建可查找的依赖<ul>
+<li>ConfigurationClassPostProcessor 处理spring配置类</li>
+<li>AutowiredAnnotationBeanPostProcessor 处理autowired及value注解</li>
+<li>CommonAnnotationBeanPostProcessor 条件激活 postContruct</li>
+<li>EventListenterMethodProcessor 处理eventListener注解标注的事件广播</li>
+<li>DefaultEventListenerFactory</li>
+<li>PersistenceAnnotationBeanPostProcessor  条件激活 处理jpa<h2 id="07-依赖查找中的经典异常"><a href="#07-依赖查找中的经典异常" class="headerlink" title="07    依赖查找中的经典异常"></a>07    依赖查找中的经典异常</h2></li>
+</ul>
+</li>
+<li>BeansException的子类<ul>
+<li>NoSuchBeanDefinitionException</li>
+<li>NoUniqueBeanDefinitionException</li>
+<li>BeanCreationException</li>
+<li>BeanInstantiationException<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanCreationExceptionDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 注册 BeanDefinition Bean Class 是一个 POJO 普通类，不过初始化方法回调时抛出异常</span></span><br><span class="line">      BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(POJO.class);</span><br><span class="line">      applicationContext.registerBeanDefinition(<span class="string">&quot;errorBean&quot;</span>, beanDefinitionBuilder.getBeanDefinition());</span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">POJO</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@PostConstruct</span> <span class="comment">// CommonAnnotationBeanPostProcessor</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> Throwable(<span class="string">&quot;init() : For purposes...&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;afterPropertiesSet() : For purposes...&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanInstantiationExceptionDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 注册 BeanDefinition Bean Class 是一个 CharSequence 接口</span></span><br><span class="line">      BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(CharSequence.class);</span><br><span class="line">      applicationContext.registerBeanDefinition(<span class="string">&quot;errorBean&quot;</span>, beanDefinitionBuilder.getBeanDefinition());</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUniqueBeanDefinitionExceptionDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">      <span class="comment">// 将当前类 NoUniqueBeanDefinitionExceptionDemo 作为配置类（Configuration Class）</span></span><br><span class="line">      applicationContext.register(NoUniqueBeanDefinitionExceptionDemo.class);</span><br><span class="line">      <span class="comment">// 启动应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">// 由于 Spring 应用上下文存在两个 String 类型的 Bean，通过单一类型查找会抛出异常</span></span><br><span class="line">          applicationContext.getBean(String.class);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (NoUniqueBeanDefinitionException e) &#123;</span><br><span class="line">          System.err.printf(<span class="string">&quot; Spring 应用上下文存在%d个 %s 类型的 Bean，具体原因：%s%n&quot;</span>,</span><br><span class="line">                  e.getNumberOfBeansFound(),</span><br><span class="line">                  String.class.getName(),</span><br><span class="line">                  e.getMessage());</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 关闭应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">bean1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">bean2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;2&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">bean3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;3&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="08-ObjectFactory-BeanFactory-区别"><a href="#08-ObjectFactory-BeanFactory-区别" class="headerlink" title="08    ObjectFactory-BeanFactory 区别"></a>08    ObjectFactory-BeanFactory 区别</h2>ObjectFactory与BeanFactory均提供依赖查找的能力<br>不过ObjectFactory仅关注一个或一种类型的bean依赖查询，并且自身不具备依赖查找的能力，由BeanFactory输出<br>BeanFactory则提供了单一类型，集合类型以及层次性等多种依赖查找方式</li>
+</ul>
+</li>
+</ol>
 
-        <div class="article-info info-on-right">
-          
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,283 +332,129 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-12-spring-bean-next/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/12/23/2020-12-20-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%9F%A5%E8%AF%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spring IOC依赖注入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/23/2020-12-12-spring-bean-next/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring Bean 实例化-初始化-销毁</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-12-spring-bean-next/">Spring Bean 实例化-初始化-销毁</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-12-spring-bean/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.786Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-12-spring-bean/">如何将BeanDefinition注册到IOC容器</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-11-29-spring-aop/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.784Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-11-29-spring-aop/">spring aop 动态代理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-11-21-concatenation-char-array-in-C/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.781Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-11-21-concatenation-char-array-in-C/">C 语言的字符串连接解释</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-10-07-cdn-for-github-pages-2/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.770Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://example.com/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/",
+  owner: 'xuekg',
+  repo: 'xuekg.github.io',
+  oauth: {
+    client_id: '6f4f7557cdabeeea1c89',
+    client_secret: 'e97d85deec5c0c531fe7a84c3daac95c8d08d37a',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-10-07-cdn-for-github-pages-2/">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源（二）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-05-03-blog-template-qna/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.768Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-05-03-blog-template-qna/">本博客模板常见问题 Q &amp; A</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-05-01-cdn-for-github-pages/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.765Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-05-01-cdn-for-github-pages/">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -514,8 +477,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

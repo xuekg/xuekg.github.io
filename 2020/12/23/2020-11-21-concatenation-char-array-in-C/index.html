@@ -6,15 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020/12 | Valar Morghulis</title>
+  <title>C 语言的字符串连接解释 | Valar Morghulis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Valar Morghulis">
-<meta property="og:url" content="http://example.com/archives/2020/12/index.html">
+  <meta name="description" content="C 语言的字符串连接解释">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C 语言的字符串连接解释">
+<meta property="og:url" content="http://example.com/2020/12/23/2020-11-21-concatenation-char-array-in-C/index.html">
 <meta property="og:site_name" content="Valar Morghulis">
+<meta property="og:description" content="C 语言的字符串连接解释">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/blog/20201121/1.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/2.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/3.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/4.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/5.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/6.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/8.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/7.png">
+<meta property="og:image" content="http://example.com/images/blog/20201121/9.png">
+<meta property="article:published_time" content="2020-12-23T10:26:07.781Z">
+<meta property="article:modified_time" content="2020-11-26T13:27:33.929Z">
 <meta property="article:author" content="xuekg">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/blog/20201121/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Valar Morghulis" type="application/atom+xml">
   
@@ -134,227 +148,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2020-11-21-concatenation-char-array-in-C" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-20-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.790Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-20-spring-bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%9F%A5%E8%AF%A2/">Spring IOC依赖注入</a>
+    <h1 class="article-title" itemprop="name">
+      C 语言的字符串连接解释
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.789Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-13-spring-bean-ioc-dependency-lookup/">Spring IOC依赖查找</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-12-spring-bean-next/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-12-spring-bean-next/">Spring Bean 实例化-初始化-销毁</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-12-12-spring-bean/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.786Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-12-12-spring-bean/">如何将BeanDefinition注册到IOC容器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-11-29-spring-aop/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.784Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-11-29-spring-aop/">spring aop 动态代理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-11-21-concatenation-char-array-in-C/" class="archive-article-date">
+        
+        <a href="/2020/12/23/2020-11-21-concatenation-char-array-in-C/" class="archive-article-date">
   	<time datetime="2020-12-23T10:26:07.781Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-11-21-concatenation-char-array-in-C/">C 语言的字符串连接解释</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天看了阮一峰的公众号里面的一篇文章，说的是关于C语言的字符 串连接的问题，正好昨天不是很忙，就在vs code上测试了下，结果就出现问题了，跟作者想要表达的意思完全相悖，而且难以解释，并且相同的程序在虚拟机里跑的结果也不一样，今天特意加了个C的微信群，发群里了也没人回，特此记录一下，疑惑还未解决。</p>
+<p>原文章链接地址：<a target="_blank" rel="noopener" href="https://blog.holbertonschool.com/code-review-string-concatenation-in-c">https://blog.holbertonschool.com/code-review-string-concatenation-in-c</a></p>
+<h2 id="01-原文大意"><a href="#01-原文大意" class="headerlink" title="01 原文大意"></a>01 原文大意</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> aa[] = <span class="string">&quot;Studytonight &quot;</span>;</span><br><span class="line">  <span class="keyword">char</span> bb[] = <span class="string">&quot;- Bestplace to learn&quot;</span>;</span><br><span class="line">  <span class="keyword">char</span> *a;</span><br><span class="line">  <span class="keyword">char</span> *b;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;aa [%s]\n&quot;</span>, aa);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;bb [%s]\n&quot;</span>, bb);</span><br><span class="line">  a = aa;</span><br><span class="line">  b = bb;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (*a)</span><br><span class="line">  &#123;</span><br><span class="line">    a++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (*b)</span><br><span class="line">  &#123;</span><br><span class="line">    *a = *b;</span><br><span class="line">    b++;</span><br><span class="line">    a++;</span><br><span class="line">  &#125;</span><br><span class="line">  *a = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;The string after concatenation is: %s\n&quot;</span>, aa);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;bb is now [%s]\n&quot;</span>, bb);</span><br><span class="line">  system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/blog/20201121/1.png" title="阶段一"></p>
+<p>当代码执行到这里的时候，虚拟内存中的数据显示如下图所示（64-bit, Linux machine）</p>
+<p><img src="/images/blog/20201121/2.png" title="内存显示一"></p>
+<p>在执行了 a = aa; b = bb;后，数据存储如下：</p>
+<p><img src="/images/blog/20201121/3.png" title="内存显示二"></p>
+<p>在执行了第一个while循环之后，a指针指向了aa数组的最后</p>
+<p><img src="/images/blog/20201121/4.png" title="内存显示三"></p>
+<p>第二个while循环，就是出问题的地方，代码目的是将bb数组的数据拼接到aa数组的后面，图中显示的是循环12次后的结果（然而我本地只能循环两次，b就变成’\000’退出while条件了）</p>
+<p><img src="/images/blog/20201121/5.png" title="内存显示四"></p>
+<p>作者意思是，上述的操作中，我们可能改变了其他变量的值，或者在将数据写入一个我们并没有权限写入的地址，这个时候本来该报错的（Segmentation Fault），但在这个特殊的例子中，我们很幸运（也是不幸运，因为没有意识到我们已经犯了错误）的没有报错，并输出了想象中的结果。</p>
+<p><img src="/images/blog/20201121/6.png" title="结果"></p>
+<p>但其实，我们的程序已经损坏了bb数组，结果如下</p>
+<p><img src="/images/blog/20201121/8.png" title="结果一"></p>
+<p>看起来我们是损坏了bb数组的数据，因为少了一个字符，但其实，bb在内存中还占据了相同的大小，只是内容被改变了，原因是因为在我们的代码中，aa数组和bb数组在内存中是分配在一起的，挨着的</p>
+<p><img src="/images/blog/20201121/7.png" title="结果二"></p>
+<p>程序结束后，bb数组的大小没有改变，内容改变了，第一个字符跑到aa数组的地盘了，bb数组的末尾有两个\0。</p>
+<h2 id="02-本地测试"><a href="#02-本地测试" class="headerlink" title="02 本地测试"></a>02 本地测试</h2><p><img src="/images/blog/20201121/9.png" title="本地结果"></p>
+<p>debug了下，发现在*a = *b后；a和b的内存地址位置并不相同，而且a指向的数据中还有乱码，走了两个循环后，b就变为空了。</p>
+<h2 id="03-TODO"><a href="#03-TODO" class="headerlink" title="03 TODO"></a>03 TODO</h2><p>没学过C，希望有了解的能给解答下疑惑。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -367,131 +232,129 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/23/2020-11-21-concatenation-char-array-in-C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-10-07-cdn-for-github-pages-2/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.770Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/12/23/2020-11-29-spring-aop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          spring aop 动态代理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/23/2020-10-07-cdn-for-github-pages-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源（二）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-10-07-cdn-for-github-pages-2/">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源（二）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-05-03-blog-template-qna/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.768Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-05-03-blog-template-qna/">本博客模板常见问题 Q &amp; A</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/2020-05-01-cdn-for-github-pages/" class="archive-article-date">
-  	<time datetime="2020-12-23T10:26:07.765Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/2020-05-01-cdn-for-github-pages/">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GitHub//" class="article-tag-list-link color2">GitHub</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://example.com/2020/12/23/2020-11-21-concatenation-char-array-in-C/",
+  owner: 'xuekg',
+  repo: 'xuekg.github.io',
+  oauth: {
+    client_id: '6f4f7557cdabeeea1c89',
+    client_secret: 'e97d85deec5c0c531fe7a84c3daac95c8d08d37a',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -514,8 +377,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
