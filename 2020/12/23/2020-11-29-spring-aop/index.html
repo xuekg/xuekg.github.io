@@ -16,8 +16,10 @@
 <meta property="og:description" content="spring aop 动态代理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-23T10:26:07.784Z">
-<meta property="article:modified_time" content="2020-11-29T13:23:50.344Z">
+<meta property="article:modified_time" content="2020-12-23T13:10:41.241Z">
 <meta property="article:author" content="xuekg">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="AOP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Valar Morghulis" type="application/atom+xml">
@@ -158,7 +160,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在做代码的性能优化，用arthas的trace命令来查看方法调用链及各个方法的耗时，发现一个加了事务注解（@Transactional(rollbackFor = Exception.class, propagation = Propagation.NOT_SUPPORTED)）的方法执行速度有点慢，调用此方法（代理）的执行时间几乎和内部方法的执行时间一样了，去掉方法上的事务注解，耗时就很少了，虽然后续还不知道如何处理这个方法（方法上的事务是后来加上去的，应该是不会去掉了，很有可能要改方法外的逻辑），但是对这点挺好奇的，于是查了下spring aop动态代理的文章，这里做个记录。</p>
+        <p>最近在做代码的性能优化，用arthas的trace命令来查看方法调用链及各个方法的耗时，发现一个加了事务注解（@Transactional(rollbackFor = Exception.class, propagation = Propagation.NOT_SUPPORTED)）的方法执行速度有点慢，调用此方法（代理）的执行时间几乎和内部方法的执行时间一样了，去掉方法上的事务注解，耗时就很少了，虽然后续还不知道如何处理这个方法（方法上的事务是后来加上去的，应该是不会去掉了，很有可能要改方法外的逻辑），但是对这点挺好奇的，于是查了下spring aop动态代理的文章，这里做个记录。<a id="more"></a></p>
 <p>原文链接:<a target="_blank" rel="noopener" href="https://yaoyuanyy.github.io/categories/spring/">https://yaoyuanyy.github.io/categories/spring/</a></p>
 <h2 id="01-AnnotationAwareAspectJAutoProxyCreator"><a href="#01-AnnotationAwareAspectJAutoProxyCreator" class="headerlink" title="01 AnnotationAwareAspectJAutoProxyCreator"></a>01 AnnotationAwareAspectJAutoProxyCreator</h2><p>直接看EnableAspectJAutoProxy接口注解（注释还是有点东西的），关键点在于@Import的类上。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  Enables support for handling components marked with AspectJ&#x27;s <span class="doctag">@Aspect</span> annotation, similar to functionality found in Spring&#x27;s &lt;aop:aspectj-autoproxy&gt; XML element. To be used on <span class="doctag">@Configuration</span> classes as follows:</span></span><br><span class="line"><span class="comment">    <span class="doctag">@Configuration</span></span></span><br><span class="line"><span class="comment">    <span class="doctag">@EnableAspectJAutoProxy</span></span></span><br><span class="line"><span class="comment">    public class AppConfig &#123;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">        <span class="doctag">@Bean</span></span></span><br><span class="line"><span class="comment">        public FooService fooService() &#123;</span></span><br><span class="line"><span class="comment">            return new FooService();</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">        <span class="doctag">@Bean</span></span></span><br><span class="line"><span class="comment">        public MyAspect myAspect() &#123;</span></span><br><span class="line"><span class="comment">            return new MyAspect();</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  Where FooService is a typical POJO component and MyAspect is an <span class="doctag">@Aspect</span>-style aspect:</span></span><br><span class="line"><span class="comment">    public class FooService &#123;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">        // various methods</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    <span class="doctag">@Aspect</span></span></span><br><span class="line"><span class="comment">    public class MyAspect &#123;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">        <span class="doctag">@Before</span>(&quot;execution(* FooService+.*(..))&quot;)</span></span><br><span class="line"><span class="comment">        public void advice() &#123;</span></span><br><span class="line"><span class="comment">            // advise FooService methods as appropriate</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  In the scenario above, <span class="doctag">@EnableAspectJAutoProxy</span> ensures that MyAspect will be properly processed and that FooService will be proxied mixing in the advice that it contributes.</span></span><br><span class="line"><span class="comment">  Users can control the type of proxy that gets created for FooService using the proxyTargetClass() attribute. The following enables CGLIB-style &#x27;subclass&#x27; proxies as opposed to the default interface-based JDK proxy approach.</span></span><br><span class="line"><span class="comment">    <span class="doctag">@Configuration</span></span></span><br><span class="line"><span class="comment">    <span class="doctag">@EnableAspectJAutoProxy</span>(proxyTargetClass=true)</span></span><br><span class="line"><span class="comment">    public class AppConfig &#123;</span></span><br><span class="line"><span class="comment">        // ...</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  Note that <span class="doctag">@Aspect</span> beans may be component-scanned like any other. Simply mark the aspect with both <span class="doctag">@Aspect</span> and <span class="doctag">@Component</span>:</span></span><br><span class="line"><span class="comment">    package com.foo;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    <span class="doctag">@Component</span></span></span><br><span class="line"><span class="comment">    public class FooService &#123; ... &#125;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    <span class="doctag">@Aspect</span></span></span><br><span class="line"><span class="comment">    <span class="doctag">@Component</span></span></span><br><span class="line"><span class="comment">    public class MyAspect &#123; ... &#125;</span></span><br><span class="line"><span class="comment">  Then use the <span class="doctag">@ComponentScan</span> annotation to pick both up:</span></span><br><span class="line"><span class="comment">    <span class="doctag">@Configuration</span></span></span><br><span class="line"><span class="comment">    <span class="doctag">@ComponentScan</span>(&quot;com.foo&quot;)</span></span><br><span class="line"><span class="comment">    <span class="doctag">@EnableAspectJAutoProxy</span></span></span><br><span class="line"><span class="comment">    public class AppConfig &#123;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">        // no explicit <span class="doctag">@Bean</span> definitions required</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  Note: <span class="doctag">@EnableAspectJAutoProxy</span> applies to its local application context only, allowing for selective proxying of beans at different levels. Please redeclare <span class="doctag">@EnableAspectJAutoProxy</span> in each individual context, e.g. the common root web application context and any separate DispatcherServlet application contexts, if you need to apply its behavior at multiple levels.</span></span><br><span class="line"><span class="comment">  This feature requires the presence of aspectjweaver on the classpath. While that dependency is optional for spring-aop in general, it is required for <span class="doctag">@EnableAspectJAutoProxy</span> and its underlying facilities.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import(AspectJAutoProxyRegistrar.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAspectJAutoProxy &#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">proxyTargetClass</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">exposeProxy</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -257,18 +259,22 @@
     <div class="article-info article-info-index">
       
       
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AOP</a>
         		</li>
       		
 		</ul>
 	</div>
 
+      
 
       
 
@@ -477,7 +483,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring Bean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
               </li>
             
             <div class="clearfix"></div>

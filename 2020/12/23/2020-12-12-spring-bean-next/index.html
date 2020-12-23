@@ -16,8 +16,9 @@
 <meta property="og:description" content="Spring Bean 实例化-初始化-销毁">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-23T10:26:07.787Z">
-<meta property="article:modified_time" content="2020-12-12T09:50:59.139Z">
+<meta property="article:modified_time" content="2020-12-23T13:09:54.841Z">
 <meta property="article:author" content="xuekg">
+<meta property="article:tag" content="Spring Bean">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Valar Morghulis" type="application/atom+xml">
@@ -162,7 +163,7 @@
 <li>构造器（xml,java注解 Java API）</li>
 <li>静态工厂方法(xml java api)</li>
 <li>通过Bean工厂方法(xml java api)</li>
-<li>通过FactoryBean（xml,java注解 Java API）<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="line">       xmlns:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line">       xsi:schemaLocation=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="line"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!-- 静态方法实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-static-method&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.ioc.overview.domain.User&quot;</span></span><br><span class="line">          factory-method=<span class="string">&quot;createUser&quot;</span>/&gt;</span><br><span class="line">   &lt;!-- 实例（Bean）方法实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-instance-method&quot;</span> factory-bean=<span class="string">&quot;userFactory&quot;</span> factory-method=<span class="string">&quot;createUser&quot;</span>/&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;userFactory&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.bean.factory.DefaultUserFactory&quot;</span>/&gt;</span><br><span class="line">   &lt;!-- FactoryBean实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-factory-bean&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.bean.factory.UserFactoryBean&quot;</span> /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<li>通过FactoryBean（xml,java注解 Java API）<a id="more"></a><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="line">       xmlns:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line">       xsi:schemaLocation=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="line"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!-- 静态方法实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-static-method&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.ioc.overview.domain.User&quot;</span></span><br><span class="line">          factory-method=<span class="string">&quot;createUser&quot;</span>/&gt;</span><br><span class="line">   &lt;!-- 实例（Bean）方法实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-instance-method&quot;</span> factory-bean=<span class="string">&quot;userFactory&quot;</span> factory-method=<span class="string">&quot;createUser&quot;</span>/&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;userFactory&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.bean.factory.DefaultUserFactory&quot;</span>/&gt;</span><br><span class="line">   &lt;!-- FactoryBean实例化 Bean --&gt;</span><br><span class="line">   &lt;bean id=<span class="string">&quot;user-by-factory-bean&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.bean.factory.UserFactoryBean&quot;</span> /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="特殊"><a href="#特殊" class="headerlink" title="特殊"></a>特殊</h3></li>
 <li>ServiceLoaderFactoryBean(xml,java注解 Java API）</li>
 <li>AutowireCapableBeanFactory#createBean(class,int,boolean)</li>
@@ -234,18 +235,18 @@
     <div class="article-info article-info-index">
       
       
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Bean</a>
         		</li>
       		
 		</ul>
 	</div>
 
+      
 
       
 
@@ -454,7 +455,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring Bean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
               </li>
             
             <div class="clearfix"></div>

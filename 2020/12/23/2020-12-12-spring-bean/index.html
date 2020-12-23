@@ -16,8 +16,10 @@
 <meta property="og:description" content="如何将BeanDefinition注册到IOC容器">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-23T10:26:07.786Z">
-<meta property="article:modified_time" content="2020-12-12T04:41:53.267Z">
+<meta property="article:modified_time" content="2020-12-23T13:10:18.978Z">
 <meta property="article:author" content="xuekg">
+<meta property="article:tag" content="Spring Bean">
+<meta property="article:tag" content="IOC">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Valar Morghulis" type="application/atom+xml">
@@ -159,7 +161,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="01-XML配置"><a href="#01-XML配置" class="headerlink" title="01 XML配置"></a>01 XML配置</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="string">&quot;user&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.geekbang.thinking.in.spring.ioc.overview.domain.User&quot;</span>&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;id&quot;</span> value=<span class="string">&quot;1&quot;</span>/&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;小马哥&quot;</span>/&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;city&quot;</span> value=<span class="string">&quot;HANGZHOU&quot;</span>/&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;workCities&quot;</span> value=<span class="string">&quot;BEIJING,HANGZHOU&quot;</span>/&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;lifeCities&quot;</span>&gt;</span><br><span class="line">      &lt;list&gt;</span><br><span class="line">          &lt;value&gt;BEIJING&lt;/value&gt;</span><br><span class="line">          &lt;value&gt;SHANGHAI&lt;/value&gt;</span><br><span class="line">      &lt;/list&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property name=<span class="string">&quot;configFileLocation&quot;</span> value=<span class="string">&quot;classpath:/META-INF/user-config.properties&quot;</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<p>不多说，经常使用的一种方式</p>
+<p>不多说，经常使用的一种方式<a id="more"></a></p>
 <h2 id="02-Java注解配置"><a href="#02-Java注解配置" class="headerlink" title="02 Java注解配置"></a>02 Java注解配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3. 通过 @Import 来进行导入</span></span><br><span class="line"><span class="meta">@Import(AnnotationBeanDefinitionDemo.Config.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationBeanDefinitionDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 创建 BeanFactory 容器</span></span><br><span class="line">      AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">      <span class="comment">// 注册 Configuration Class（配置类）</span></span><br><span class="line">      applicationContext.register(AnnotationBeanDefinitionDemo.class);</span><br><span class="line">      <span class="comment">// 启动 Spring 应用上下文</span></span><br><span class="line">      applicationContext.refresh();</span><br><span class="line">      <span class="comment">// 按照类型依赖查找</span></span><br><span class="line">      System.out.println(<span class="string">&quot;Config 类型的所有 Beans&quot;</span> + applicationContext.getBeansOfType(Config.class));</span><br><span class="line">      System.out.println(<span class="string">&quot;User 类型的所有 Beans&quot;</span> + applicationContext.getBeansOfType(User.class));</span><br><span class="line">      <span class="comment">// 显示地关闭 Spring 应用上下文</span></span><br><span class="line">      applicationContext.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 通过 @Component 方式</span></span><br><span class="line">  <span class="meta">@Component</span> <span class="comment">// 定义当前类作为 Spring Bean（组件）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 1. 通过 @Bean 方式定义</span></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">        * 通过 Java 注解的方式，定义了一个 Bean</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">      <span class="meta">@Bean(name = &#123;&quot;user&quot;, &quot;xiaomage-user&quot;&#125;)</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> User <span class="title">user</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          User user = <span class="keyword">new</span> User();</span><br><span class="line">          user.setId(<span class="number">1L</span>);</span><br><span class="line">          user.setName(<span class="string">&quot;小马哥&quot;</span>);</span><br><span class="line">          <span class="keyword">return</span> user;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意，此处的Config类，Import了一次，又Component了一次，但是容器中是只有一个Bean的。<br>另外即使给了user一个别名，也是只有一个User类的Bean的。</p>
 <h2 id="03-Java-API配置"><a href="#03-Java-API配置" class="headerlink" title="03 Java API配置"></a>03 Java API配置</h2><p>命名方式 org.springframework.beans.factory.support.BeanDefinitionRegistry#registerBeanDefinition<br>非命名方式org.springframework.beans.factory.support.BeanDefinitionReaderUtils#registerWithGeneratedName </p>
@@ -198,18 +200,22 @@
     <div class="article-info article-info-index">
       
       
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spring-Bean//" class="article-tag-list-link color2">Spring Bean</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Bean</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IOC</a>
         		</li>
       		
 		</ul>
 	</div>
 
+      
 
       
 
@@ -418,7 +424,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring Bean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
               </li>
             
             <div class="clearfix"></div>
