@@ -15,21 +15,21 @@
 <meta property="og:site_name" content="Valar Morghulis">
 <meta property="og:description" content="C 语言的字符串连接解释">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/blog/20201121/1.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/2.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/3.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/4.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/5.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/6.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/8.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/7.png">
-<meta property="og:image" content="http://example.com/images/blog/20201121/9.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/1.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/2.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/3.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/4.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/5.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/6.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/8.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/7.png">
+<meta property="og:image" content="http://example.com/img/blog/20201121/9.png">
 <meta property="article:published_time" content="2020-12-23T10:26:07.781Z">
-<meta property="article:modified_time" content="2020-12-23T13:10:53.511Z">
+<meta property="article:modified_time" content="2020-12-23T13:34:01.799Z">
 <meta property="article:author" content="xuekg">
 <meta property="article:tag" content="C">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/blog/20201121/1.png">
+<meta name="twitter:image" content="http://example.com/img/blog/20201121/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Valar Morghulis" type="application/atom+xml">
   
@@ -172,23 +172,23 @@
         <p>昨天看了阮一峰的公众号里面的一篇文章，说的是关于C语言的字符 串连接的问题，正好昨天不是很忙，就在vs code上测试了下，结果就出现问题了，跟作者想要表达的意思完全相悖，而且难以解释，并且相同的程序在虚拟机里跑的结果也不一样，今天特意加了个C的微信群，发群里了也没人回，特此记录一下，疑惑还未解决。<a id="more"></a></p>
 <p>原文章链接地址：<a target="_blank" rel="noopener" href="https://blog.holbertonschool.com/code-review-string-concatenation-in-c">https://blog.holbertonschool.com/code-review-string-concatenation-in-c</a></p>
 <h2 id="01-原文大意"><a href="#01-原文大意" class="headerlink" title="01 原文大意"></a>01 原文大意</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> aa[] = <span class="string">&quot;Studytonight &quot;</span>;</span><br><span class="line">  <span class="keyword">char</span> bb[] = <span class="string">&quot;- Bestplace to learn&quot;</span>;</span><br><span class="line">  <span class="keyword">char</span> *a;</span><br><span class="line">  <span class="keyword">char</span> *b;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;aa [%s]\n&quot;</span>, aa);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;bb [%s]\n&quot;</span>, bb);</span><br><span class="line">  a = aa;</span><br><span class="line">  b = bb;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (*a)</span><br><span class="line">  &#123;</span><br><span class="line">    a++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (*b)</span><br><span class="line">  &#123;</span><br><span class="line">    *a = *b;</span><br><span class="line">    b++;</span><br><span class="line">    a++;</span><br><span class="line">  &#125;</span><br><span class="line">  *a = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;The string after concatenation is: %s\n&quot;</span>, aa);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;bb is now [%s]\n&quot;</span>, bb);</span><br><span class="line">  system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/blog/20201121/1.png" title="阶段一"></p>
+<p><img src="/img/blog/20201121/1.png" title="阶段一"></p>
 <p>当代码执行到这里的时候，虚拟内存中的数据显示如下图所示（64-bit, Linux machine）</p>
-<p><img src="/images/blog/20201121/2.png" title="内存显示一"></p>
+<p><img src="/img/blog/20201121/2.png" title="内存显示一"></p>
 <p>在执行了 a = aa; b = bb;后，数据存储如下：</p>
-<p><img src="/images/blog/20201121/3.png" title="内存显示二"></p>
+<p><img src="/img/blog/20201121/3.png" title="内存显示二"></p>
 <p>在执行了第一个while循环之后，a指针指向了aa数组的最后</p>
-<p><img src="/images/blog/20201121/4.png" title="内存显示三"></p>
+<p><img src="/img/blog/20201121/4.png" title="内存显示三"></p>
 <p>第二个while循环，就是出问题的地方，代码目的是将bb数组的数据拼接到aa数组的后面，图中显示的是循环12次后的结果（然而我本地只能循环两次，b就变成’\000’退出while条件了）</p>
-<p><img src="/images/blog/20201121/5.png" title="内存显示四"></p>
+<p><img src="/img/blog/20201121/5.png" title="内存显示四"></p>
 <p>作者意思是，上述的操作中，我们可能改变了其他变量的值，或者在将数据写入一个我们并没有权限写入的地址，这个时候本来该报错的（Segmentation Fault），但在这个特殊的例子中，我们很幸运（也是不幸运，因为没有意识到我们已经犯了错误）的没有报错，并输出了想象中的结果。</p>
-<p><img src="/images/blog/20201121/6.png" title="结果"></p>
+<p><img src="/img/blog/20201121/6.png" title="结果"></p>
 <p>但其实，我们的程序已经损坏了bb数组，结果如下</p>
-<p><img src="/images/blog/20201121/8.png" title="结果一"></p>
+<p><img src="/img/blog/20201121/8.png" title="结果一"></p>
 <p>看起来我们是损坏了bb数组的数据，因为少了一个字符，但其实，bb在内存中还占据了相同的大小，只是内容被改变了，原因是因为在我们的代码中，aa数组和bb数组在内存中是分配在一起的，挨着的</p>
-<p><img src="/images/blog/20201121/7.png" title="结果二"></p>
+<p><img src="/img/blog/20201121/7.png" title="结果二"></p>
 <p>程序结束后，bb数组的大小没有改变，内容改变了，第一个字符跑到aa数组的地盘了，bb数组的末尾有两个\0。</p>
-<h2 id="02-本地测试"><a href="#02-本地测试" class="headerlink" title="02 本地测试"></a>02 本地测试</h2><p><img src="/images/blog/20201121/9.png" title="本地结果"></p>
+<h2 id="02-本地测试"><a href="#02-本地测试" class="headerlink" title="02 本地测试"></a>02 本地测试</h2><p><img src="/img/blog/20201121/9.png" title="本地结果"></p>
 <p>debug了下，发现在*a = *b后；a和b的内存地址位置并不相同，而且a指向的数据中还有乱码，走了两个循环后，b就变为空了。</p>
 <h2 id="03-TODO"><a href="#03-TODO" class="headerlink" title="03 TODO"></a>03 TODO</h2><p>没学过C，希望有了解的能给解答下疑惑。</p>
 
@@ -320,6 +320,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E5%8E%9F%E6%96%87%E5%A4%A7%E6%84%8F"><span class="toc-number">1.</span> <span class="toc-text">01 原文大意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">02 本地测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-TODO"><span class="toc-number">3.</span> <span class="toc-text">03 TODO</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
